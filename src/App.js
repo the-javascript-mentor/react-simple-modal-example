@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
+import useModalState from "./useModalState";
 
-function App() {
+const Modal = () => {
+  const { isModalOpen, openModal, closeModal } = useModalState();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input type="text" tabIndex={isModalOpen ? -1 : 0} />
+      <button onClick={openModal} tabIndex={isModalOpen ? -1 : 0}>
+        Open modal
+      </button>
+      {isModalOpen && (
+        <>
+          <div className="ModalLayover" />
+          <div className="Modal">
+            <p>Modal content will come here.</p>
+            <button className="ModalCloseButton" onClick={closeModal}>
+              ✕
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
-}
+};
 
-export default App;
+export default Modal;
